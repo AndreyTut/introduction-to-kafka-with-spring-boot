@@ -6,6 +6,8 @@ import dev.lydtech.dispatch.util.TestEventData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.ExecutionException;
+
 import static java.util.UUID.randomUUID;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -23,7 +25,7 @@ class OrderCreatedHandlerTest {
     }
 
     @Test
-    void listen() {
+    void listen() throws ExecutionException, InterruptedException {
         OrderCreated testEvent = TestEventData.buildOrderCreatedEvent(randomUUID(), randomUUID().toString());
         handler.listen(testEvent);
         verify(dispatchServiceMock, times(1)).process(testEvent);
