@@ -1,8 +1,5 @@
 package dev.lydtech.dispatch;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import dev.lydtech.dispatch.message.OrderCreated;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -20,8 +17,10 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
-import org.springframework.kafka.support.serializer.JsonSerde;
 import org.springframework.kafka.support.serializer.JsonSerializer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @ComponentScan(basePackages = {"dev.lydtech"})
 @Configuration
