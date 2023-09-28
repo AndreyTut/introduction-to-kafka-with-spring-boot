@@ -14,4 +14,6 @@ import lombok.NoArgsConstructor;
 public class OrderDispatched {
 
     UUID orderId;
+    String senderId;
+    String note;
 }

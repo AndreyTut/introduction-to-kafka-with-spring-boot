@@ -7,12 +7,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class DispatchService {
 
     private static final String DISPATCH_TRACKING_TOPIC = "dispatch.tracking";
     private static final String ORDER_DISPATCHED_TOPIC = "order.dispatched";
+
+    private static final UUID SENDER_ID = UUID.randomUUID();
+
     private final KafkaTemplate<String, Object> kafkaProducer;
 
     public void process(OrderCreated orderCreated) throws Exception {
@@ -23,6 +28,8 @@ public class DispatchService {
 
         OrderDispatched orderDispatched = OrderDispatched.builder()
                 .orderId(orderCreated.getOrderId())
+                .senderId(SENDER_ID.toString())
+                .note("senderId: " + SENDER_ID.toString())
                 .build();
         kafkaProducer.send(ORDER_DISPATCHED_TOPIC, orderDispatched).get();
     }
